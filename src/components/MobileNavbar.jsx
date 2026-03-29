@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from "react-router-dom";
 import {
   Droplets, Wind, Sun, User, MapPin, ChevronRight,
   Bookmark, Sprout, Bot, LayoutList, Mail, Phone, Heart,
 } from 'lucide-react';
-const NavIcon = ({ icon, active = false }) => (
-    <button className={`p-3 rounded-2xl transition-all ${active ? 'text-[#3F865F]' : 'text-gray-300 hover:text-[#C5A677]'}`}>{React.cloneElement(icon, { size: 28, strokeWidth: 2.5 })}</button>
+const NavIcon = ({ icon, active = false , onClick }) => (
+    <button onClick={onClick} className={`p-3 rounded-2xl transition-all ${active ? 'text-[#3F865F]' : 'text-gray-300 hover:text-[#C5A677]'}`}>{React.cloneElement(icon, { size: 28, strokeWidth: 2.5 })}</button>
 );
 const   MobileNavbar = () => {
+    const navigate=useNavigate();
   return (
 
       <div className="md:hidden fixed bottom-0 left-0 w-full px-4 pb-4 z-50">
@@ -23,7 +24,7 @@ const   MobileNavbar = () => {
             </div>
             <div className="w-16 h-1"></div>
             <NavIcon icon={<Bookmark />} />
-            <NavIcon icon={<User />} />
+            <NavIcon onClick={navigate('/profile')} icon={<User />} />
         </div>
       </div>
 
