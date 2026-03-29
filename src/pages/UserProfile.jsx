@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import translations from './translations';
 import { useLanguage } from '../context/LanguageContext'; 
-
+import loginImage from "../assets/login_character_1.png"
 
 const UserProfile = () => {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -211,7 +211,7 @@ useEffect( () => {
                 {/* Circular Profile with Earthy Ring */}
                 <div className="w-32 h-32 md:w-44 md:h-44 bg-white p-1.5 rounded-full shadow-2xl border-4 border-[#C5A677]/30 ring-8 ring-white/10">
                   <img
-                    src={farmer.avatar}
+                    src={loginImage}
                     alt="Profile"
                     className="w-full h-full object-cover rounded-full bg-[#FDFEFA] scale-110"
                   />

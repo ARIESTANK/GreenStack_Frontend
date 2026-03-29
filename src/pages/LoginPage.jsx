@@ -5,6 +5,8 @@ import translations from './translations';
 import { useLanguage } from '../context/LanguageContext'; 
 
 import { useNavigate } from "react-router-dom";
+import loginImage from "../assets/login_character_1.png"
+import teamLogo from "../assets/team_logo.png"
 
 const   LoginPage = () => {
   // Set default language to 'mm' (Myanmar)
@@ -46,7 +48,7 @@ const   LoginPage = () => {
         <div className="flex justify-center -mb-16 relative z-20">
             <div className="w-24 h-24 md:w-32 md:h-32 mb-5 flex items-center justify-center ">
               <img
-                src="./src/assets/login_character_1.png"
+                src={loginImage}
                 alt="Farmer"
                 className="w-full h-full  scale-125"
               />
@@ -114,7 +116,7 @@ const   LoginPage = () => {
                 {t.needHelp}
             </button>
             <div className="flex items-center gap-2 text-[#A3C475]">
-              <img src="./src/assets/team_logo.png" className="w-8 h-8" alt="logo" />
+              <img src={teamLogo} className="w-8 h-8" alt="logo" />
               <span className="text-xs font-bold tracking-widest text-gray-400">GreenStack</span>
             </div>
           </div>

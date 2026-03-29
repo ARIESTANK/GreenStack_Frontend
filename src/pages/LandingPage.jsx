@@ -17,7 +17,7 @@ import Navbar from "../components/Navbar";
 import MobileNavbar from "../components/MobileNavbar";
 import translations from './translations';
 import { useLanguage } from '../context/LanguageContext'; // 1. Import the hook
-
+import farmerImg from "../assets/home_character_1.png";
 
 const LandingPage = () => {
 
@@ -79,7 +79,7 @@ const LandingPage = () => {
     <div className="w-[30%] md:w-1/2 flex justify-end items-end relative h-full">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-80 md:h-80 bg-white/10 rounded-full blur-3xl"></div>
       <img
-        src="./src/assets/home_character_1.png" 
+        src={farmerImg} 
         alt="Farmer"
         className="w-28 sm:w-36 md:w-80 h-auto z-10 drop-shadow-2xl translate-y-3 md:translate-y-10 scale-110 md:scale-125"
       />
