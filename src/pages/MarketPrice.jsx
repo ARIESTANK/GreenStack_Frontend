@@ -166,7 +166,7 @@ const MarketPrice = () => {
         )}
       </main>
 
-      <MobileNavbar/>
+      <Navbar/>
     </div>
   );
 };
