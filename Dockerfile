@@ -3,19 +3,16 @@
 # =========================
 FROM node:20-alpine AS build
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files and install dependencies
 COPY package.json package-lock.json ./
-
-# Install dependencies
 RUN npm install
 
 # Copy all source files
 COPY . .
 
-# Build the React app
+# Build React app
 RUN npm run build
 
 # =========================
@@ -23,17 +20,19 @@ RUN npm run build
 # =========================
 FROM node:20-alpine
 
+WORKDIR /app
+
 # Install 'serve' globally
 RUN npm install -g serve
 
-# Set working directory
-WORKDIR /app
+# Copy build folder from previous stage
+COPY --from=build /app/build ./build
 
-# Set the PORT environment variable dynamically
+# Set the PORT dynamically (Railway sets $PORT automatically)
 ENV PORT $PORT
 
-# Expose port (optional, just for clarity)
+# Expose the port (for clarity)
 EXPOSE 3000
 
-# Start the app using 'serve'
+# Start the app
 CMD ["serve", "-s", "build", "-l", "3000"]
