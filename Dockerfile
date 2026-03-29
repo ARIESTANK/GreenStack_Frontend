@@ -29,9 +29,6 @@ RUN npm install -g serve
 # Set working directory
 WORKDIR /app
 
-# Copy build from previous stage
-COPY --from=build /app/build ./build
-
 # Set the PORT environment variable dynamically
 ENV PORT $PORT
 
