@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 import teamLogo from "../assets/team_logo.png"
+import {  Loader2 } from "lucide-react";
 const Navbar = (props) => {
   const navigate=useNavigate()
   const [active, setActive] = useState(props.name || 'landing');
@@ -14,16 +15,17 @@ const Navbar = (props) => {
   const [isTipsOpen, setIsTipsOpen] = useState(false);
   const [selectedSoil, setSelectedSoil] = useState(null);
   const [tipsResponse, setTipsResponse] = useState(null);
-
+  const [loading,setLoading]=useState(false);
+  // setIsLoading(true);
 
   const [messages, setMessages] = useState([]);
 const [question, setQuestion] = useState("");
   const askQuestion=async()=>{
     if (!question) return;
-
+    
   // Add user message first
   setMessages(prev => [...prev, { type: "user", text: question }]);
-
+    document.getElementById("questionInput").value = ""; // Clear input immediately for better UX
   const res = await fetch('https://firebase-server-database-testing-production.up.railway.app/chatBot', {
     method: 'POST',
     headers: {
@@ -39,6 +41,7 @@ const [question, setQuestion] = useState("");
     setMessages(prev => [
       ...prev,
       { type: "bot", text: response.reply }
+      
     ]);
   } else if (response.error) {
     console.error("Backend Error:", response.error);
@@ -77,6 +80,7 @@ const [question, setQuestion] = useState("");
 
   const [location,setLocation]=useState({});
   const handleSendSoil = async() => {
+    setLoading(true);
     if (selectedSoil) {
       const response=await fetch("https://firebase-server-database-testing-production.up.railway.app/cropRecommendation", {
         method: 'POST',
@@ -88,6 +92,7 @@ const [question, setQuestion] = useState("");
       const data = await response.json();
       console.log(data.result)
       setTipsResponse(data.result);
+      setLoading(false);
     }
   };
   
@@ -236,7 +241,8 @@ const [question, setQuestion] = useState("");
   {/* Input Area */}
   <div className="absolute bottom-0 left-0 w-full p-6 bg-white border-t border-gray-100 flex gap-2">
     <input 
-      type="text" 
+      type="text"
+      id="questionInput" 
       value={question} // Controlled input so it clears after send
       placeholder="မေးခွန်းတစ်ခုခု မေးမြန်းပါ..."
       onChange={(e) => setQuestion(e.target.value)} 
@@ -361,7 +367,16 @@ const [question, setQuestion] = useState("");
               selectedSoil ? 'bg-[#3F865F] text-white shadow-[#3F865F]/20' : 'bg-gray-100 text-gray-300 cursor-not-allowed'
             }`}
           >
-            <Send size={18} /> Get Advice
+          {loading ? (
+      <>
+        <Loader2 size={18} className="animate-spin" />
+        Processing...
+      </>
+    ) : (
+      <>
+        <Send size={18} /> Get Advice
+      </>
+    )}
           </button>
         </div>
       </div>
