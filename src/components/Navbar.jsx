@@ -4,6 +4,7 @@ import {
   LayoutList, Bookmark, CheckCircle2 
 } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
+import teamLogo from "../assets/team_logo.png"
 const Navbar = (props) => {
   const navigate=useNavigate()
   const [active, setActive] = useState(props.name || 'landing');
@@ -120,7 +121,7 @@ const [question, setQuestion] = useState("");
       <nav className="hidden md:flex sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 px-12 py-4 justify-between items-center shadow-sm">
         <div className="flex items-center gap-2">
           <div className=" rounded-xl rotate-3">
-             <img src="./src/assets/team_logo.png" className="w-8 h-8" alt="logo" />
+             <img src={teamLogo} className="w-8 h-8" alt="logo" />
           </div>
           <span className="text-xl font-black text-[#3F865F] tracking-tight">GreenStack</span>
         </div>
