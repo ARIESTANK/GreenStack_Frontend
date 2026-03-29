@@ -100,7 +100,13 @@ useEffect(() => {
 
   // Shortcut to access current language strings
   const t = translations[lang];
-  
+  const getFormattedDate = (date = new Date()) => {
+  return new Intl.DateTimeFormat('en-GB', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long'
+  }).format(date);
+};
   const weeklyForecast = [
     { day: "Today", temp: "31", icon: <Sun className="text-[#A3C475]" /> },
     { day: "Mon", temp: "29", icon: <CloudRain className="text-blue-300" /> },
@@ -141,7 +147,7 @@ useEffect(() => {
                     Mostly Sunny
                   </p>
                   <p className="text-xs opacity-70 font-bold uppercase tracking-wider">
-                    Sunday, 24 March
+                    {getFormattedDate()}
                   </p>
                 </div>
               </div>
